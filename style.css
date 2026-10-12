@@ -1,39 +1,61 @@
-{
+
+/* ========================================
+   CONFIGURACIÓN GENERAL
+   ======================================== */
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
+    min-height: 100vh;
     background-color: #111111;
     color: white;
     font-family: Arial, sans-serif;
 }
 
+/* ========================================
+   TARJETA PRINCIPAL
+   ======================================== */
+
 .tarjeta {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 20px 16px;
     position: relative;
     z-index: 1;
+
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+
+    margin: 0 auto;
+    padding: 20px 16px;
 }
 
+/* ========================================
+   FOTO DE PERFIL
+   ======================================== */
+
 .foto-principal {
-    width: 100%;
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .foto-principal img {
+    display: block;
     width: 180px;
     height: 180px;
     object-fit: contain;
 }
 
+/* ========================================
+   INFORMACIÓN PERSONAL
+   ======================================== */
+
 .informacion {
-    text-align: center;
     margin-top: 16px;
+    text-align: center;
 }
 
 .informacion h1 {
@@ -43,63 +65,105 @@ body {
 }
 
 .informacion h2 {
+    margin-top: 4px;
+    color: #d9d9d9;
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 5px;
-    margin-top: 4px;
-    color: #d9d9d9;
 }
 
 .informacion p {
     margin-top: 8px;
-    font-size: 15px;
     color: #bdbdbd;
+    font-size: 15px;
+    line-height: 1.5;
 }
+
+/* ========================================
+   REDES SOCIALES
+   ======================================== */
 
 .redes {
-    margin-top: 26px;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: 12px;
-}
 
-.redes {
     width: 100%;
     margin-top: 26px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
 }
 
-.seccion-donaciones {
-    width: 100%;
-}
-.fondo-fotografico {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-}
+/* Instagram, WhatsApp y TikTok */
 
-
-/* ==============================
-   SECCIÓN DE DONACIONES
-   ============================== */
-
-.seccion-donaciones {
-    width: 100%;
-}
-
-/* Botón principal de donaciones */
-#boton-donaciones {
+.redes > a {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 
+    width: 100%;
+    min-height: 56px;
+    padding: 14px 20px;
+
+    border: 1px solid #333333;
+    border-radius: 14px;
+
+    background-color: #181818;
+    color: white;
+
+    font-family: inherit;
+    font-size: 15px;
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.icono {
+    display: block;
+    flex-shrink: 0;
+
+    width: 20px;
+    height: 20px;
+
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+}
+
+.redes > a:hover {
+    background-color: #202020;
+    border-color: #444444;
+}
+
+.redes > a:active {
+    transform: scale(0.98);
+    background-color: #222222;
+}
+
+/* ========================================
+   BOTÓN DE DONACIONES
+   ======================================== */
+
+.seccion-donaciones {
+    width: 100%;
+    min-width: 0;
+}
+
+/* Mismo tamaño y estilo que los botones sociales */
+
+#boton-donaciones {
     position: relative;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
     width: 100%;
-    min-height: 52px;
+    min-height: 56px;
     padding: 14px 20px;
 
     border: 1px solid #333333;
@@ -112,46 +176,67 @@ body {
     font-size: 15px;
 
     cursor: pointer;
-    transition: 0.2s ease;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
 }
 
-/* Símbolo del botón */
 #boton-donaciones span:first-child {
     font-size: 20px;
+    line-height: 1;
 }
 
-/* Flecha ubicada a la derecha */
+/* Flecha a la derecha, sin desplazar el texto central */
+
 #flecha-donaciones {
     position: absolute;
     right: 20px;
 
     font-size: 20px;
-    transition: transform 0.2s ease;
+    line-height: 1;
 }
 
-/* Efecto al pasar el cursor */
 #boton-donaciones:hover {
     background-color: #202020;
     border-color: #444444;
 }
 
-/* Efecto al presionar */
 #boton-donaciones:active {
     transform: scale(0.98);
     background-color: #222222;
 }
 
-/* Contenido desplegable */
+/* Indicador visual al navegar con teclado */
+
+#boton-donaciones:focus-visible,
+.redes > a:focus-visible,
+#boton-copiar-alias:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
+/* ========================================
+   CONTENIDO DESPLEGABLE DE DONACIONES
+   ======================================== */
+
 #contenido-donaciones {
     margin-top: 12px;
     padding: 20px 16px;
 
-    background-color: #181818;
     border: 1px solid #333333;
     border-radius: 14px;
+
+    background-color: #181818;
 }
 
-/* Título principal */
+/* Respeta el atributo hidden del HTML */
+
+#contenido-donaciones[hidden] {
+    display: none !important;
+}
+
 #contenido-donaciones h2 {
     margin-bottom: 12px;
 
@@ -161,7 +246,6 @@ body {
     text-align: center;
 }
 
-/* Texto general */
 #contenido-donaciones p {
     margin-top: 10px;
 
@@ -171,34 +255,54 @@ body {
     text-align: center;
 }
 
-/* Bloques con los objetivos */
+/* Objetivos de las donaciones */
+
 .objetivo-donacion {
     margin-top: 18px;
     padding: 16px 12px;
 
-    background-color: #202020;
     border: 1px solid #333333;
     border-radius: 12px;
+
+    background-color: #202020;
 }
 
-/* Títulos de los objetivos */
 .objetivo-donacion h3 {
     color: white;
     font-size: 15px;
     font-weight: 600;
+    line-height: 1.4;
     text-align: center;
 }
 
-/* Agradecimiento final */
+/* Agradecimiento */
+
 #contenido-donaciones .agradecimiento {
     margin-top: 20px;
-    font-size: 13px;
     color: #d9d9d9;
+    font-size: 13px;
 }
 
+/* ========================================
+   ALIAS PARA TRANSFERENCIAS
+   ======================================== */
 
+.datos-donacion {
+    margin-top: 18px;
+}
 
-/* Contenedor del alias y el botón */
+.datos-donacion h3 {
+    color: white;
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+#contenido-donaciones .texto-alias {
+    margin-top: 10px;
+}
+
+/* Caja que contiene el alias y el botón */
+
 .contenedor-alias {
     display: flex;
     align-items: center;
@@ -209,12 +313,12 @@ body {
     margin-top: 16px;
     padding: 12px;
 
-    background-color: #151515;
     border: 1px solid #383838;
     border-radius: 10px;
+
+    background-color: #151515;
 }
 
-/* Alias bancario */
 #alias-donacion {
     flex: 1;
     min-width: 0;
@@ -225,7 +329,8 @@ body {
     overflow-wrap: anywhere;
 }
 
-/* Botón para copiar */
+/* Botón para copiar el alias */
+
 #boton-copiar-alias {
     display: inline-flex;
     align-items: center;
@@ -235,10 +340,11 @@ body {
     flex-shrink: 0;
     padding: 10px 12px;
 
-    color: white;
-    background-color: #303030;
     border: 1px solid #444444;
     border-radius: 8px;
+
+    background-color: #303030;
+    color: white;
 
     font-family: inherit;
     font-size: 12px;
@@ -256,12 +362,12 @@ body {
     transform: scale(0.97);
 }
 
-/* Ícono de copiar */
 .icono-copiar {
     display: block;
+    flex-shrink: 0;
+
     width: 17px;
     height: 17px;
-    flex-shrink: 0;
 
     fill: none;
     stroke: currentColor;
@@ -271,6 +377,7 @@ body {
 }
 
 /* Mensaje de confirmación */
+
 #contenido-donaciones p.mensaje-copia {
     min-height: 18px;
     margin-top: 8px;
@@ -280,9 +387,10 @@ body {
     text-align: center;
 }
 
+/* ========================================
+   ANIMACIONES DE DONACIONES
+   ======================================== */
 
-
-/* Animación de apertura */
 @keyframes abrirDonaciones {
     from {
         opacity: 0;
@@ -295,7 +403,6 @@ body {
     }
 }
 
-/* Animación de cierre */
 @keyframes cerrarDonaciones {
     from {
         opacity: 1;
@@ -316,31 +423,22 @@ body {
     animation: cerrarDonaciones 0.2s ease-in forwards;
 }
 
-/* Respetamos la preferencia del usuario por menos movimiento */
-@media (prefers-reduced-motion: reduce) {
-    #contenido-donaciones.donaciones-abriendo,
-    #contenido-donaciones.donaciones-cerrando {
-        animation: none;
-    }
-}
-
-
-
-
-/* =================================
+/* ========================================
    CARRUSEL FOTOGRÁFICO DE FONDO
-   ================================= */
+   ======================================== */
 
-/* Fondo del carrusel */
 .fondo-fotografico {
     position: fixed;
     inset: 0;
     z-index: -1;
+
     overflow: hidden;
     background-color: #111111;
+    pointer-events: none;
 }
 
-/* Fondo ampliado y desenfocado */
+/* Imagen ampliada y desenfocada para rellenar los laterales */
+
 .foto-difuminada {
     position: absolute;
     inset: -30px;
@@ -360,7 +458,8 @@ body {
     opacity: 1;
 }
 
-/* Fotografía vertical original */
+/* Fotografía vertical principal */
+
 .foto-fondo {
     position: absolute;
     inset: 0;
@@ -377,10 +476,59 @@ body {
     opacity: 1;
 }
 
-/* Oscurecemos ambas capas para conservar el estilo */
+/* Oscurece el fondo para facilitar la lectura */
+
 .capa-oscura {
     position: absolute;
     inset: 0;
 
     background: rgba(0, 0, 0, 0.30);
 }
+
+/* ========================================
+   AJUSTES PARA CELULARES
+   ======================================== */
+
+@media (max-width: 360px) {
+    .tarjeta {
+        padding: 18px 12px;
+    }
+
+    .foto-principal img {
+        width: 155px;
+        height: 155px;
+    }
+
+    .informacion h1 {
+        font-size: 25px;
+    }
+
+    .contenedor-alias {
+        gap: 8px;
+        padding: 10px;
+    }
+
+    #boton-copiar-alias {
+        padding: 9px;
+        font-size: 11px;
+    }
+}
+
+/* ========================================
+   ACCESIBILIDAD: MENOS MOVIMIENTO
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .redes > a,
+    #boton-donaciones,
+    .foto-fondo,
+    .foto-difuminada {
+        transition: none;
+    }
+
+    #contenido-donaciones.donaciones-abriendo,
+    #contenido-donaciones.donaciones-cerrando {
+        animation: none;
+    }
+}
+
