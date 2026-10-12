@@ -1,213 +1,249 @@
-```html
-<!DOCTYPE html>
-<html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+// ============================================
+// ELEMENTOS DEL DESPLEGABLE DE DONACIONES
+// ============================================
 
-    <title>Leo Aballay Photo</title>
+// Buscamos los elementos en el HTML.
+const botonDonaciones = document.getElementById("boton-donaciones");
+const contenidoDonaciones = document.getElementById("contenido-donaciones");
+const flechaDonaciones = document.getElementById("flecha-donaciones");
 
-    <link rel="stylesheet" href="style.css">
-</head>
 
-<body>
+// ============================================
+// ABRIR Y CERRAR DONACIONES CON ANIMACIÓN
+// ============================================
 
-    <main class="tarjeta">
+if (botonDonaciones && contenidoDonaciones && flechaDonaciones) {
 
-        
+    botonDonaciones.addEventListener("click", function () {
 
-        <!-- Carrusel fotográfico de fondo -->
-        <div class="fondo-fotografico" aria-hidden="true">
+        // Comprobamos si el contenido está oculto.
+        const estaOculto = contenidoDonaciones.hidden;
 
-            <!-- Fotografías ampliadas y desenfocadas -->
-            <div class="foto-difuminada activa"></div>
-            <div class="foto-difuminada"></div>
+        if (estaOculto) {
 
-            <!-- Fotografías verticales originales -->
-            <div class="foto-fondo activa"></div>
-            <div class="foto-fondo"></div>
+            // Mostramos el contenido.
+            contenidoDonaciones.hidden = false;
 
-            <!-- Capa para mantener la legibilidad -->
-            <div class="capa-oscura"></div>
+            // Reiniciamos las clases de animación.
+            contenidoDonaciones.classList.remove("donaciones-cerrando");
+            contenidoDonaciones.classList.remove("donaciones-abriendo");
 
-        </div>
+            // Activamos la animación de apertura.
+            contenidoDonaciones.classList.add("donaciones-abriendo");
 
+            // Actualizamos el estado del botón.
+            botonDonaciones.setAttribute("aria-expanded", "true");
 
+            // Cambiamos la flecha hacia arriba.
+            flechaDonaciones.textContent = "⌃";
 
-        <!-- Foto principal -->
-        <div class="foto-principal">
-            <img src="img/FotoPerfil.png" alt="Leo Aballay">
-        </div>
+        } else {
 
-        <!-- Información personal -->
-        <div class="informacion">
+            // Activamos la animación de cierre.
+            contenidoDonaciones.classList.remove("donaciones-abriendo");
+            contenidoDonaciones.classList.add("donaciones-cerrando");
 
-            <h1>Leo Aballay</h1>
+            // Actualizamos el estado del botón.
+            botonDonaciones.setAttribute("aria-expanded", "false");
 
-            <h2>PHOTO</h2>
+            // Cambiamos la flecha hacia abajo.
+            flechaDonaciones.textContent = "⌄";
 
-            <p>Street Photography</p>
+            // Esperamos a que termine la animación para ocultarlo.
+            contenidoDonaciones.addEventListener("animationend", function cerrar() {
 
-            <p>Creador de contenido</p>
+                contenidoDonaciones.hidden = true;
 
-        </div>
+                contenidoDonaciones.classList.remove("donaciones-cerrando");
 
-        <!-- Redes sociales -->
-        <div class="redes">
+            }, { once: true });
 
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/leo.aballay.photo/"
-               target="_blank"
-               rel="noopener noreferrer">
+        }
 
-                <svg class="icono" viewBox="0 0 24 24" aria-hidden="true">
-                    <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-                    <circle cx="12" cy="12" r="4"></circle>
-                    <circle cx="17.5" cy="6.5" r="1"></circle>
-                </svg>
+    });
 
-                <span>Instagram</span>
+}
 
-            </a>
 
-            <!-- WhatsApp -->
-            <a href="https://wa.me/543574412412"
-               target="_blank"
-               rel="noopener noreferrer">
+// ============================================
+// ELEMENTOS PARA COPIAR EL ALIAS
+// ============================================
 
-                <svg class="icono" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M20.5 11.5a8.5 8.5 0 0 1-12.9 7.3L3 20l1.3-4.4A8.5 8.5 0 1 1 20.5 11.5z"></path>
-                    <path d="M8.5 8.5c.3-.5.7-.6 1.1-.1l1 1.4c.2.3.2.6 0 .9l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.3-.2.6-.2.9 0l1.4 1c.5.4.4.8-.1 1.1-.6.4-.4.8-.1 1.1-.6.4-1.3.5-2 .2-2.7-1-4.8-3.1-5.8-5.8-.3-.7-.2-1.4.2-2z"></path>
-                </svg>
+const botonCopiarAlias = document.getElementById("boton-copiar-alias");
+const aliasDonacion = document.getElementById("alias-donacion");
+const mensajeCopia = document.getElementById("mensaje-copia");
 
-                <span>WhatsApp</span>
 
-            </a>
+// ============================================
+// MÉTODO ALTERNATIVO PARA COPIAR
+// ============================================
 
-            <!-- TikTok -->
-            <a href="https://www.tiktok.com/@leo.aballay.photo"
-               target="_blank"
-               rel="noopener noreferrer">
+function copiarTextoAlternativo(texto) {
 
-                <svg class="icono" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M15 4v10.5a4.5 4.5 0 1 1-3-4.2"></path>
-                    <path d="M15 4c.5 2.4 2 4 4.5 4"></path>
-                </svg>
+    // Creamos un campo temporal.
+    const campoTemporal = document.createElement("textarea");
 
-                <span>TikTok</span>
+    campoTemporal.value = texto;
+    campoTemporal.setAttribute("readonly", "");
 
-            </a>
+    // Lo ubicamos fuera de la pantalla.
+    campoTemporal.style.position = "fixed";
+    campoTemporal.style.left = "-9999px";
 
-            <!-- Sección de donaciones -->
-            <div class="seccion-donaciones">
+    document.body.appendChild(campoTemporal);
 
-                <button
-                    type="button"
-                    id="boton-donaciones"
-                    aria-expanded="false"
-                    aria-controls="contenido-donaciones">
+    // Seleccionamos el alias.
+    campoTemporal.select();
 
-                    <span aria-hidden="true">♡</span>
+    // Intentamos copiarlo.
+    const copiado = document.execCommand("copy");
 
-                    <span>Donaciones</span>
+    // Eliminamos el campo temporal.
+    document.body.removeChild(campoTemporal);
 
-                    <span id="flecha-donaciones" aria-hidden="true">⌄</span>
+    return copiado;
+}
 
-                </button>
 
-                <!-- Contenido que se desplegará al tocar Donaciones -->
-                <div id="contenido-donaciones" hidden>
+// ============================================
+// BOTÓN PARA COPIAR EL ALIAS DE ASTROPAY
+// ============================================
 
-                    <h2>Apoyá mi trabajo</h2>
+if (botonCopiarAlias && aliasDonacion && mensajeCopia) {
 
-                    <p>
-                        La fotografía callejera me permite capturar momentos
-                        únicos, contar historias y compartir mi mirada del mundo.
-                    </p>
+    botonCopiarAlias.addEventListener("click", async function () {
 
-                    <!-- Primer objetivo -->
-                    <div class="objetivo-donacion">
+        // Obtenemos el alias del HTML.
+        const alias = aliasDonacion.textContent.trim();
 
-                        <h3>Apoyar mi trabajo fotográfico</h3>
+        // Buscamos el texto del botón.
+        const textoBoton = botonCopiarAlias.querySelector("#texto-copiar-alias");
 
-                        <p>
-                            Tu aporte me ayuda a seguir fotografiando,
-                            desarrollar nuevos proyectos y compartir más imágenes.
-                        </p>
+        // Limpiamos mensajes anteriores.
+        mensajeCopia.textContent = "";
 
-                    </div>
+        try {
 
-                    <!-- Segundo objetivo -->
-                    <div class="objetivo-donacion">
+            // Intentamos utilizar el portapapeles moderno.
+            if (navigator.clipboard && window.isSecureContext) {
 
-                        <h3>Ayudar a comprar equipos</h3>
+                await navigator.clipboard.writeText(alias);
 
-                        <p>
-                            Contribuir a mejorar mi equipo fotográfico para
-                            seguir creciendo como fotógrafo y creador de contenido.
-                        </p>
+            } else {
 
-                    </div>
+                // Utilizamos el método alternativo.
+                const copiado = copiarTextoAlternativo(alias);
 
-                    <!-- Agradecimiento -->
-                    <p class="agradecimiento">
-                        Cada aporte, por pequeño que sea, suma.
-                        Gracias por apoyar mi trabajo.
-                    </p>
+                if (!copiado) {
+                    throw new Error("No se pudo copiar el alias");
+                }
 
-                  
-<!-- Datos para colaborar -->
-<div class="datos-donacion">
+            }
 
-    <h3>Alias para transferencias</h3>
+            // Confirmamos que se copió.
+            mensajeCopia.textContent = "¡Alias copiado correctamente!";
 
-    <p class="texto-alias">
-        Si querés colaborar, podés hacerlo mediante una
-        transferencia a mi cuenta de AstroPay.
-    </p>
+            if (textoBoton) {
+                textoBoton.textContent = "¡Copiado!";
+            }
 
-    <div class="contenedor-alias">
+            // Restauramos el botón después de dos segundos.
+            setTimeout(function () {
 
-        <span id="alias-donacion">lobo.manco</span>
+                if (textoBoton) {
+                    textoBoton.textContent = "Copiar alias";
+                }
 
-        <button
-            type="button"
-            id="boton-copiar-alias"
-            aria-label="Copiar alias">
+                mensajeCopia.textContent = "";
 
-            <svg
-                class="icono-copiar"
-                viewBox="0 0 24 24"
-                aria-hidden="true">
+            }, 2000);
 
-                <rect x="8" y="8" width="13" height="13" rx="2"></rect>
-                <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path>
+        } catch (error) {
 
-            </svg>
+            // Informamos si la copia automática falla.
+            mensajeCopia.textContent =
+                "No se pudo copiar. Copiá manualmente: " + alias;
 
-            <span id="texto-copiar-alias">Copiar alias</span>
+        }
 
-        </button>
+    });
 
-    </div>
+}
 
-    <p id="mensaje-copia" class="mensaje-copia" aria-live="polite"></p>
 
-</div>
 
 
-                </div>
 
-            </div>
+// ============================================
+// CARRUSEL FOTOGRÁFICO CON FONDO DIFUMINADO
+// ============================================
 
-        </div>
+const fotosFondo = document.querySelectorAll(".foto-fondo");
+const fotosDifuminadas = document.querySelectorAll(".foto-difuminada");
 
-    </main>
+const imagenesFondo = [
+    "img/fondo/foto1.jpg",
+    "img/fondo/foto2.jpg",
+    "img/fondo/foto3.jpg",
+    "img/fondo/foto4.jpg",
+    "img/fondo/foto5.jpg",
+    "img/fondo/foto6.jpg",
+    "img/fondo/foto7.jpg",
+    "img/fondo/foto8.jpg",
+    "img/fondo/foto9.jpg",
+    "img/fondo/foto10.jpg",
+    "img/fondo/foto11.jpg",
+    "img/fondo/foto12.jpg",
+    "img/fondo/foto13.jpg",
+    "img/fondo/foto14.jpg",
+    "img/fondo/foto15.jpg",
+    "img/fondo/foto16.jpg"
+];
 
-    <!-- JavaScript para desplegar las donaciones -->
-    <script src="script.js"></script>
+if (fotosFondo.length >= 2 && fotosDifuminadas.length >= 2) {
 
-</body>
+    let indiceActual = 0;
+    let capaVisible = 0;
 
-</html>
+    function cargarFoto(indice, capa) {
+
+        const ruta = imagenesFondo[indice];
+
+        fotosFondo[capa].style.backgroundImage = `url("${ruta}")`;
+        fotosDifuminadas[capa].style.backgroundImage = `url("${ruta}")`;
+    }
+
+    // Mostramos la primera fotografía.
+    cargarFoto(indiceActual, capaVisible);
+
+    fotosFondo[capaVisible].classList.add("activa");
+    fotosDifuminadas[capaVisible].classList.add("activa");
+
+    // Precargamos las imágenes para suavizar los cambios.
+    imagenesFondo.forEach(function (ruta) {
+        const imagen = new Image();
+        imagen.src = ruta;
+    });
+
+    // Cambiamos la fotografía cada cinco segundos.
+    setInterval(function () {
+
+        indiceActual = (indiceActual + 1) % imagenesFondo.length;
+
+        const siguienteCapa = capaVisible === 0 ? 1 : 0;
+
+        cargarFoto(indiceActual, siguienteCapa);
+
+        fotosFondo[siguienteCapa].classList.add("activa");
+        fotosDifuminadas[siguienteCapa].classList.add("activa");
+
+        fotosFondo[capaVisible].classList.remove("activa");
+        fotosDifuminadas[capaVisible].classList.remove("activa");
+
+        capaVisible = siguienteCapa;
+
+    }, 5000);
+
+}
+
