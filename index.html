@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,58 +12,201 @@
 </head>
 
 <body>
-<main class="tarjeta">
 
-    <div class="fondo-fotografico"></div>
-    
-    <div class="foto-principal">
-        <img src="img/FotoPerfil.png" alt="Leo Aballay">
+    <main class="tarjeta">
+
+        
+
+        <!-- Carrusel fotográfico de fondo -->
+        <div class="fondo-fotografico" aria-hidden="true">
+
+            <!-- Fotografías ampliadas y desenfocadas -->
+            <div class="foto-difuminada activa"></div>
+            <div class="foto-difuminada"></div>
+
+            <!-- Fotografías verticales originales -->
+            <div class="foto-fondo activa"></div>
+            <div class="foto-fondo"></div>
+
+            <!-- Capa para mantener la legibilidad -->
+            <div class="capa-oscura"></div>
+
+        </div>
+
+
+
+        <!-- Foto principal -->
+        <div class="foto-principal">
+            <img src="img/FotoPerfil.png" alt="Leo Aballay">
+        </div>
+
+        <!-- Información personal -->
+        <div class="informacion">
+
+            <h1>Leo Aballay</h1>
+
+            <h2>PHOTO</h2>
+
+            <p>Street Photography</p>
+
+            <p>Creador de contenido</p>
+
+        </div>
+
+        <!-- Redes sociales -->
+        <div class="redes">
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/leo.aballay.photo/"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <svg class="icono" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <circle cx="17.5" cy="6.5" r="1"></circle>
+                </svg>
+
+                <span>Instagram</span>
+
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/543574412412"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <svg class="icono" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.5 11.5a8.5 8.5 0 0 1-12.9 7.3L3 20l1.3-4.4A8.5 8.5 0 1 1 20.5 11.5z"></path>
+                    <path d="M8.5 8.5c.3-.5.7-.6 1.1-.1l1 1.4c.2.3.2.6 0 .9l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.3-.2.6-.2.9 0l1.4 1c.5.4.4.8-.1 1.1-.6.4-.4.8-.1 1.1-.6.4-1.3.5-2 .2-2.7-1-4.8-3.1-5.8-5.8-.3-.7-.2-1.4.2-2z"></path>
+                </svg>
+
+                <span>WhatsApp</span>
+
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@leo.aballay.photo"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <svg class="icono" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M15 4v10.5a4.5 4.5 0 1 1-3-4.2"></path>
+                    <path d="M15 4c.5 2.4 2 4 4.5 4"></path>
+                </svg>
+
+                <span>TikTok</span>
+
+            </a>
+
+            <!-- Sección de donaciones -->
+            <div class="seccion-donaciones">
+
+                <button
+                    type="button"
+                    id="boton-donaciones"
+                    aria-expanded="false"
+                    aria-controls="contenido-donaciones">
+
+                    <span aria-hidden="true">♡</span>
+
+                    <span>Donaciones</span>
+
+                    <span id="flecha-donaciones" aria-hidden="true">⌄</span>
+
+                </button>
+
+                <!-- Contenido que se desplegará al tocar Donaciones -->
+                <div id="contenido-donaciones" hidden>
+
+                    <h2>Apoyá mi trabajo</h2>
+
+                    <p>
+                        La fotografía callejera me permite capturar momentos
+                        únicos, contar historias y compartir mi mirada del mundo.
+                    </p>
+
+                    <!-- Primer objetivo -->
+                    <div class="objetivo-donacion">
+
+                        <h3>Apoyar mi trabajo fotográfico</h3>
+
+                        <p>
+                            Tu aporte me ayuda a seguir fotografiando,
+                            desarrollar nuevos proyectos y compartir más imágenes.
+                        </p>
+
+                    </div>
+
+                    <!-- Segundo objetivo -->
+                    <div class="objetivo-donacion">
+
+                        <h3>Ayudar a comprar equipos</h3>
+
+                        <p>
+                            Contribuir a mejorar mi equipo fotográfico para
+                            seguir creciendo como fotógrafo y creador de contenido.
+                        </p>
+
+                    </div>
+
+                    <!-- Agradecimiento -->
+                    <p class="agradecimiento">
+                        Cada aporte, por pequeño que sea, suma.
+                        Gracias por apoyar mi trabajo.
+                    </p>
+
+                  
+<!-- Datos para colaborar -->
+<div class="datos-donacion">
+
+    <h3>Alias para transferencias</h3>
+
+    <p class="texto-alias">
+        Si querés colaborar, podés hacerlo mediante una
+        transferencia a mi cuenta de AstroPay.
+    </p>
+
+    <div class="contenedor-alias">
+
+        <span id="alias-donacion">lobo.manco</span>
+
+        <button
+            type="button"
+            id="boton-copiar-alias"
+            aria-label="Copiar alias">
+
+            <svg
+                class="icono-copiar"
+                viewBox="0 0 24 24"
+                aria-hidden="true">
+
+                <rect x="8" y="8" width="13" height="13" rx="2"></rect>
+                <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path>
+
+            </svg>
+
+            <span id="texto-copiar-alias">Copiar alias</span>
+
+        </button>
+
     </div>
 
-    <div class="informacion">
-
-        <h1>Leo Aballay</h1>
-
-        <h2>PHOTO</h2>
-
-        <p>Street Photography</p>
-
-        <p>Creador de contenido</p>
-
-    </div>
-    <div class="redes">
-
-    <a href="https://www.instagram.com/leo.aballay.photo/" target="_blank">
-    <svg class="icono" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-        <circle cx="12" cy="12" r="4"></circle>
-        <circle cx="17.5" cy="6.5" r="1"></circle>
-    </svg>
-
-    <span>Instagram</span>
-    </a>
-
-<a href="https://wa.me/543574412412" target="_blank">
-    <svg class="icono" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M20.5 11.5a8.5 8.5 0 0 1-12.9 7.3L3 20l1.3-4.4A8.5 8.5 0 1 1 20.5 11.5z"></path>
-        <path d="M8.5 8.5c.3-.5.7-.6 1.1-.1l1 1.4c.2.3.2.6 0 .9l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.3-.2.6-.2.9 0l1.4 1c.5.4.4.8-.1 1.1-.6.4-1.3.5-2 .2-2.7-1-4.8-3.1-5.8-5.8-.3-.7-.2-1.4.2-2z"></path>
-    </svg>
-
-    <span>WhatsApp</span>
-    </a>
-
-   <a href="https://www.tiktok.com/@leo.aballay.photo" target="_blank">
-    <svg class="icono" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M15 4v10.5a4.5 4.5 0 1 1-3-4.2"></path>
-        <path d="M15 4c.5 2.4 2 4 4.5 4"></path>
-    </svg>
-
-    <span>TikTok</span>
-</a>
+    <p id="mensaje-copia" class="mensaje-copia" aria-live="polite"></p>
 
 </div>
 
-</main>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- JavaScript para desplegar las donaciones -->
+    <script src="script.js"></script>
 
 </body>
 
