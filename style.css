@@ -107,9 +107,7 @@ button { font: inherit; }
     transition: background-color .2s, border-color .2s;
 }
 
-.redes .red-instagram { background: var(--accent); color: #20163d; border-color: transparent; }
-.redes .red-instagram:hover { background: #ded3ff; }
-.redes a:not(.red-instagram):hover, #boton-donaciones:hover { background: #cad0ff24; border-color: #bcc5ff75; }
+.redes a:hover, #boton-donaciones:hover { background: #cad0ff24; border-color: #bcc5ff75; }
 
 .icono, .icono-copiar {
     width: 22px;
