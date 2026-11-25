@@ -199,7 +199,7 @@ if (vistaSocial && typeof vistaSocial.showModal === "function") {
     const perfiles = {
         instagram: {
             nombre: "Instagram",
-            descripcion: "Una muestra de mi fotografía callejera.",
+            descripcion: "Una muestra de mis fotos y videos.",
             fotos: [1, 5, 9],
         },
         tiktok: {
@@ -213,7 +213,54 @@ if (vistaSocial && typeof vistaSocial.showModal === "function") {
     const descripcion = document.getElementById("descripcion-vista-social");
     const fotos = document.getElementById("fotos-vista-social");
     const enlacePerfil = document.getElementById("enlace-vista-social");
+    const vistas = new Map();
     let enlaceActivo;
+
+    function mostrarPerfil(red, url, ruta, perfil) {
+        for (const vista of vistas.values()) vista.hidden = true;
+
+        if (vistas.has(red)) {
+            vistas.get(red).hidden = false;
+            return;
+        }
+
+        const vista = document.createElement("div");
+        const tarjeta = document.createElement("blockquote");
+        const muestra = document.createElement("div");
+        const script = document.createElement("script");
+
+        muestra.className = "vista-fotos";
+        for (const numero of perfil.fotos) {
+            const foto = document.createElement("img");
+            foto.src = "img/fondo/foto" + numero + ".jpg";
+            foto.alt = "";
+            muestra.append(foto);
+        }
+        tarjeta.append(muestra);
+
+        if (red === "instagram") {
+            tarjeta.className = "instagram-media";
+            tarjeta.dataset.instgrmPermalink = url;
+            tarjeta.dataset.instgrmVersion = "14";
+            script.src = "https://www.instagram.com/embed.js";
+        } else {
+            tarjeta.className = "tiktok-embed";
+            tarjeta.cite = url;
+            tarjeta.dataset.uniqueId = ruta;
+            tarjeta.dataset.embedType = "creator";
+            const seccion = document.createElement("section");
+            seccion.append(muestra);
+            tarjeta.append(seccion);
+            script.src = "https://www.tiktok.com/embed.js";
+        }
+
+        script.async = true;
+        vista.className = "vista-perfil-red";
+        vista.append(tarjeta);
+        fotos.append(vista);
+        vistas.set(red, vista);
+        vista.append(script);
+    }
 
     document.querySelectorAll("[data-vista-social]").forEach((enlace) => {
         enlace.setAttribute("aria-haspopup", "dialog");
@@ -228,15 +275,10 @@ if (vistaSocial && typeof vistaSocial.showModal === "function") {
             descripcion.textContent = perfil.descripcion;
             enlacePerfil.href = enlace.href;
             enlacePerfil.textContent = "Ir a " + perfil.nombre;
-            fotos.replaceChildren(...perfil.fotos.map((numero) => {
-                const foto = document.createElement("img");
-                foto.src = "img/fondo/foto" + numero + ".jpg";
-                foto.alt = "";
-                return foto;
-            }));
 
             enlaceActivo = enlace;
             vistaSocial.showModal();
+            mostrarPerfil(enlace.dataset.vistaSocial, enlace.href, ruta, perfil);
             evento.preventDefault();
         });
     });
