@@ -192,3 +192,64 @@ if (fotosFondo.length >= 2 && fotosDifuminadas.length >= 2) {
 
 }
 
+
+const vistaSocial = document.getElementById("vista-social");
+
+if (vistaSocial && typeof vistaSocial.showModal === "function") {
+    const perfiles = {
+        instagram: {
+            nombre: "Instagram",
+            descripcion: "Una muestra de mi fotografía callejera.",
+            fotos: [1, 5, 9],
+        },
+        tiktok: {
+            nombre: "TikTok",
+            descripcion: "Conocé mi trabajo y encontrá mis videos en TikTok.",
+            fotos: [2, 7, 14],
+        },
+    };
+    const titulo = document.getElementById("titulo-vista-social");
+    const usuario = document.getElementById("usuario-vista-social");
+    const descripcion = document.getElementById("descripcion-vista-social");
+    const fotos = document.getElementById("fotos-vista-social");
+    const enlacePerfil = document.getElementById("enlace-vista-social");
+    let enlaceActivo;
+
+    document.querySelectorAll("[data-vista-social]").forEach((enlace) => {
+        enlace.setAttribute("aria-haspopup", "dialog");
+        enlace.addEventListener("click", (evento) => {
+            if (evento.ctrlKey || evento.metaKey || evento.shiftKey || evento.altKey) return;
+
+            const perfil = perfiles[enlace.dataset.vistaSocial];
+            const ruta = new URL(enlace.href).pathname.replace(/^[/@]+|\/+$/g, "");
+
+            titulo.textContent = perfil.nombre;
+            usuario.textContent = "@" + ruta;
+            descripcion.textContent = perfil.descripcion;
+            enlacePerfil.href = enlace.href;
+            enlacePerfil.textContent = "Ir a " + perfil.nombre;
+            fotos.replaceChildren(...perfil.fotos.map((numero) => {
+                const foto = document.createElement("img");
+                foto.src = "img/fondo/foto" + numero + ".jpg";
+                foto.alt = "";
+                return foto;
+            }));
+
+            enlaceActivo = enlace;
+            vistaSocial.showModal();
+            evento.preventDefault();
+        });
+    });
+
+    vistaSocial.addEventListener("click", (evento) => {
+        if (evento.target === vistaSocial) {
+            const area = vistaSocial.getBoundingClientRect();
+            if (evento.clientX < area.left || evento.clientX > area.right ||
+                evento.clientY < area.top || evento.clientY > area.bottom) {
+                vistaSocial.close();
+            }
+        }
+    });
+
+    vistaSocial.addEventListener("close", () => enlaceActivo?.focus());
+}
