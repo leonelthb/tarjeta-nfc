@@ -107,9 +107,9 @@ button { font: inherit; }
     transition: background-color .2s, border-color .2s;
 }
 
-.redes a:first-child { background: var(--accent); color: #20163d; border-color: transparent; }
-.redes a:first-child:hover { background: #ded3ff; }
-.redes a:not(:first-child):hover, #boton-donaciones:hover { background: #cad0ff24; border-color: #bcc5ff75; }
+.redes .red-instagram { background: var(--accent); color: #20163d; border-color: transparent; }
+.redes .red-instagram:hover { background: #ded3ff; }
+.redes a:not(.red-instagram):hover, #boton-donaciones:hover { background: #cad0ff24; border-color: #bcc5ff75; }
 
 .icono, .icono-copiar {
     width: 22px;
@@ -203,3 +203,59 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; }
 }
+
+.foto-principal img { border-radius: 50%; }
+
+.vista-social {
+    width: min(calc(100% - 2rem), 34rem);
+    max-height: calc(100dvh - 2rem);
+    padding: clamp(1rem, 4vw, 1.5rem);
+    border: 1px solid var(--line);
+    border-radius: 1.4rem;
+    background: linear-gradient(145deg, #272b41, #161924);
+    color: var(--ink);
+    box-shadow: 0 24px 80px #090a14a0;
+}
+
+.vista-social::backdrop { background: #090a14bc; }
+.vista-cabecera { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+.vista-cabecera h2 { margin: 0; font: 400 2.1rem/1 Georgia, serif; }
+#usuario-vista-social { margin: .35rem 0 0; color: var(--accent); overflow-wrap: anywhere; }
+#descripcion-vista-social { margin: 1rem 0; color: var(--muted); line-height: 1.5; }
+
+.vista-cerrar {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.vista-cerrar:hover { background: #cad0ff24; }
+.vista-fotos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .4rem; }
+.vista-fotos img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: contain;
+    border-radius: .55rem;
+    background: #10121b;
+}
+
+.vista-ir {
+    display: grid;
+    place-items: center;
+    min-height: 48px;
+    margin-top: 1rem;
+    padding: .65rem 1rem;
+    border-radius: .75rem;
+    background: var(--accent);
+    color: #20163d;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.vista-ir:hover { background: #ded3ff; }
