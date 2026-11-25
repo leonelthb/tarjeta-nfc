@@ -37,7 +37,7 @@
         <!-- Foto principal -->
         <section class="panel" aria-labelledby="nombre-marca">
         <header class="foto-principal">
-            <img src="img/FotoPerfil.png" alt="Logo original de Leo Photos" width="76" height="76">
+            <img src="img/FotoPerfil.png" alt="Logo de Leo Photos" width="76" height="76">
         </header>
 
         <!-- Información personal -->
@@ -51,7 +51,7 @@
         <div class="redes">
 
             <!-- Instagram -->
-            <a href="https://www.instagram.com/leo.aballay.photo/"
+            <a class="red-instagram" data-vista-social="instagram" href="https://www.instagram.com/leo.aballay.photo/"
                target="_blank"
                rel="noopener noreferrer">
 
@@ -80,7 +80,7 @@
             </a>
 
             <!-- TikTok -->
-            <a href="https://www.tiktok.com/@leo.aballay.photo"
+            <a data-vista-social="tiktok" href="https://www.tiktok.com/@leo.aballay.photo"
                target="_blank"
                rel="noopener noreferrer">
 
@@ -200,7 +200,22 @@
     </section>
     </main>
 
-    <!-- JavaScript para desplegar las donaciones -->
+    <dialog id="vista-social" class="vista-social" aria-labelledby="titulo-vista-social">
+        <div class="vista-cabecera">
+            <div>
+                <h2 id="titulo-vista-social"></h2>
+                <p id="usuario-vista-social"></p>
+            </div>
+            <form method="dialog">
+                <button class="vista-cerrar" aria-label="Cerrar vista previa" autofocus>×</button>
+            </form>
+        </div>
+        <p id="descripcion-vista-social"></p>
+        <div id="fotos-vista-social" class="vista-fotos"></div>
+        <a id="enlace-vista-social" class="vista-ir" target="_blank" rel="noopener noreferrer"></a>
+    </dialog>
+
+
     <script src="script.js"></script>
 
 </body>
