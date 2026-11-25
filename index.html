@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Leo Aballay Photo</title>
+    <title>Leo Photos</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -35,20 +35,15 @@
 
 
         <!-- Foto principal -->
-        <div class="foto-principal">
-            <img src="img/FotoPerfil.png" alt="Leo Aballay">
-        </div>
+        <section class="panel" aria-labelledby="nombre-marca">
+        <header class="foto-principal">
+            <img src="img/FotoPerfil.png" alt="Logo original de Leo Photos" width="76" height="76">
+        </header>
 
         <!-- Información personal -->
         <div class="informacion">
 
-            <h1>Leo Aballay</h1>
-
-            <h2>PHOTO</h2>
-
-            <p>Street Photography</p>
-
-            <p>Creador de contenido</p>
+            <h1 id="nombre-marca">Leo <em>Photos</em></h1><p>Fotografía callejera <span aria-hidden="true">·</span> Creador de contenido</p>
 
         </div>
 
@@ -107,7 +102,7 @@
                     aria-expanded="false"
                     aria-controls="contenido-donaciones">
 
-                    <span aria-hidden="true">♡</span>
+                    <span class="corazon" aria-hidden="true">♡</span>
 
                     <span>Donaciones</span>
 
@@ -202,6 +197,7 @@
 
         </div>
 
+    </section>
     </main>
 
     <!-- JavaScript para desplegar las donaciones -->
@@ -210,4 +206,3 @@
 </body>
 
 </html>
-
