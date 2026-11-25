@@ -1,534 +1,147 @@
-
-/* ========================================
-   CONFIGURACIÓN GENERAL
-   ======================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+    color-scheme: dark;
+    --ink: #fff8ef;
+    --muted: #ded3c6;
+    --accent: #ffd29b;
+    --line: #fff1df30;
+    font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-body {
-    min-height: 100vh;
-    background-color: #111111;
-    color: white;
-    font-family: Arial, sans-serif;
-}
-
-/* ========================================
-   TARJETA PRINCIPAL
-   ======================================== */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: #161311; }
+button { font: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
 .tarjeta {
-    position: relative;
-    z-index: 1;
-
-    width: 100%;
-    max-width: 480px;
-    min-height: 100vh;
-
-    margin: 0 auto;
-    padding: 20px 16px;
-}
-
-/* ========================================
-   FOTO DE PERFIL
-   ======================================== */
-
-.foto-principal {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.foto-principal img {
-    display: block;
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-}
-
-/* ========================================
-   INFORMACIÓN PERSONAL
-   ======================================== */
-
-.informacion {
-    margin-top: 16px;
-    text-align: center;
-}
-
-.informacion h1 {
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: 1px;
-}
-
-.informacion h2 {
-    margin-top: 4px;
-    color: #d9d9d9;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 5px;
-}
-
-.informacion p {
-    margin-top: 8px;
-    color: #bdbdbd;
-    font-size: 15px;
-    line-height: 1.5;
-}
-
-/* ========================================
-   REDES SOCIALES
-   ======================================== */
-
-.redes {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-
-    width: 100%;
-    margin-top: 26px;
-}
-
-/* Instagram, WhatsApp y TikTok */
-
-.redes > a {
-    display: flex;
+    isolation: isolate;
+    min-height: 100svh;
+    display: grid;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    width: 100%;
-    min-height: 56px;
-    padding: 14px 20px;
-
-    border: 1px solid #333333;
-    border-radius: 14px;
-
-    background-color: #181818;
-    color: white;
-
-    font-family: inherit;
-    font-size: 15px;
-    text-decoration: none;
-
-    transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
+    justify-items: end;
+    padding: clamp(2rem, 6vw, 7rem);
 }
-
-.icono {
-    display: block;
-    flex-shrink: 0;
-
-    width: 20px;
-    height: 20px;
-
-    fill: none;
-    stroke: white;
-    stroke-width: 2;
-}
-
-.redes > a:hover {
-    background-color: #202020;
-    border-color: #444444;
-}
-
-.redes > a:active {
-    transform: scale(0.98);
-    background-color: #222222;
-}
-
-/* ========================================
-   BOTÓN DE DONACIONES
-   ======================================== */
-
-.seccion-donaciones {
-    width: 100%;
-    min-width: 0;
-}
-
-/* Mismo tamaño y estilo que los botones sociales */
-
-#boton-donaciones {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    width: 100%;
-    min-height: 56px;
-    padding: 14px 20px;
-
-    border: 1px solid #333333;
-    border-radius: 14px;
-
-    background-color: #181818;
-    color: white;
-
-    font-family: inherit;
-    font-size: 15px;
-
-    cursor: pointer;
-
-    transition:
-        background-color 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
-}
-
-#boton-donaciones span:first-child {
-    font-size: 20px;
-    line-height: 1;
-}
-
-/* Flecha a la derecha, sin desplazar el texto central */
-
-#flecha-donaciones {
-    position: absolute;
-    right: 20px;
-
-    font-size: 20px;
-    line-height: 1;
-}
-
-#boton-donaciones:hover {
-    background-color: #202020;
-    border-color: #444444;
-}
-
-#boton-donaciones:active {
-    transform: scale(0.98);
-    background-color: #222222;
-}
-
-/* Indicador visual al navegar con teclado */
-
-#boton-donaciones:focus-visible,
-.redes > a:focus-visible,
-#boton-copiar-alias:focus-visible {
-    outline: 2px solid white;
-    outline-offset: 3px;
-}
-
-/* ========================================
-   CONTENIDO DESPLEGABLE DE DONACIONES
-   ======================================== */
-
-#contenido-donaciones {
-    margin-top: 12px;
-    padding: 20px 16px;
-
-    border: 1px solid #333333;
-    border-radius: 14px;
-
-    background-color: #181818;
-}
-
-/* Respeta el atributo hidden del HTML */
-
-#contenido-donaciones[hidden] {
-    display: none !important;
-}
-
-#contenido-donaciones h2 {
-    margin-bottom: 12px;
-
-    color: white;
-    font-size: 21px;
-    font-weight: 600;
-    text-align: center;
-}
-
-#contenido-donaciones p {
-    margin-top: 10px;
-
-    color: #bdbdbd;
-    font-size: 14px;
-    line-height: 1.6;
-    text-align: center;
-}
-
-/* Objetivos de las donaciones */
-
-.objetivo-donacion {
-    margin-top: 18px;
-    padding: 16px 12px;
-
-    border: 1px solid #333333;
-    border-radius: 12px;
-
-    background-color: #202020;
-}
-
-.objetivo-donacion h3 {
-    color: white;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.4;
-    text-align: center;
-}
-
-/* Agradecimiento */
-
-#contenido-donaciones .agradecimiento {
-    margin-top: 20px;
-    color: #d9d9d9;
-    font-size: 13px;
-}
-
-/* ========================================
-   ALIAS PARA TRANSFERENCIAS
-   ======================================== */
-
-.datos-donacion {
-    margin-top: 18px;
-}
-
-.datos-donacion h3 {
-    color: white;
-    font-size: 17px;
-    line-height: 1.4;
-}
-
-#contenido-donaciones .texto-alias {
-    margin-top: 10px;
-}
-
-/* Caja que contiene el alias y el botón */
-
-.contenedor-alias {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-
-    width: 100%;
-    margin-top: 16px;
-    padding: 12px;
-
-    border: 1px solid #383838;
-    border-radius: 10px;
-
-    background-color: #151515;
-}
-
-#alias-donacion {
-    flex: 1;
-    min-width: 0;
-
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    overflow-wrap: anywhere;
-}
-
-/* Botón para copiar el alias */
-
-#boton-copiar-alias {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-
-    flex-shrink: 0;
-    padding: 10px 12px;
-
-    border: 1px solid #444444;
-    border-radius: 8px;
-
-    background-color: #303030;
-    color: white;
-
-    font-family: inherit;
-    font-size: 12px;
-    line-height: 1.2;
-
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-#boton-copiar-alias:hover {
-    background-color: #404040;
-}
-
-#boton-copiar-alias:active {
-    transform: scale(0.97);
-}
-
-.icono-copiar {
-    display: block;
-    flex-shrink: 0;
-
-    width: 17px;
-    height: 17px;
-
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-/* Mensaje de confirmación */
-
-#contenido-donaciones p.mensaje-copia {
-    min-height: 18px;
-    margin-top: 8px;
-
-    color: #d9d9d9;
-    font-size: 12px;
-    text-align: center;
-}
-
-/* ========================================
-   ANIMACIONES DE DONACIONES
-   ======================================== */
-
-@keyframes abrirDonaciones {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes cerrarDonaciones {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    to {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-}
-
-#contenido-donaciones.donaciones-abriendo {
-    animation: abrirDonaciones 0.25s ease-out;
-}
-
-#contenido-donaciones.donaciones-cerrando {
-    animation: cerrarDonaciones 0.2s ease-in forwards;
-}
-
-/* ========================================
-   CARRUSEL FOTOGRÁFICO DE FONDO
-   ======================================== */
 
 .fondo-fotografico {
     position: fixed;
     inset: 0;
     z-index: -1;
-
     overflow: hidden;
-    background-color: #111111;
-    pointer-events: none;
+    background: #161311;
 }
 
-/* Imagen ampliada y desenfocada para rellenar los laterales */
-
-.foto-difuminada {
-    position: absolute;
-    inset: -30px;
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    filter: blur(22px);
-    transform: scale(1.08);
-
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-}
-
-.foto-difuminada.activa {
-    opacity: 1;
-}
-
-/* Fotografía vertical principal */
-
-.foto-fondo {
+.foto-difuminada, .foto-fondo {
     position: absolute;
     inset: 0;
-
-    background-size: auto 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-
+    background-size: cover;
+    background-position: center 38%;
     opacity: 0;
-    transition: opacity 1.5s ease-in-out;
+    transition: opacity 1.35s ease-in-out;
 }
 
-.foto-fondo.activa {
-    opacity: 1;
-}
-
-/* Oscurece el fondo para facilitar la lectura */
+.foto-difuminada { filter: blur(26px) brightness(.72); transform: scale(1.08); }
+.foto-fondo { right: 33%; }
+.foto-difuminada.activa, .foto-fondo.activa { opacity: 1; }
 
 .capa-oscura {
     position: absolute;
     inset: 0;
-
-    background: rgba(0, 0, 0, 0.30);
+    background: linear-gradient(90deg, #120e0b12 35%, #15100da0 68%, #15100de8);
 }
 
-/* ========================================
-   AJUSTES PARA CELULARES
-   ======================================== */
-
-@media (max-width: 360px) {
-    .tarjeta {
-        padding: 18px 12px;
-    }
-
-    .foto-principal img {
-        width: 155px;
-        height: 155px;
-    }
-
-    .informacion h1 {
-        font-size: 25px;
-    }
-
-    .contenedor-alias {
-        gap: 8px;
-        padding: 10px;
-    }
-
-    #boton-copiar-alias {
-        padding: 9px;
-        font-size: 11px;
-    }
+.panel {
+    width: min(100%, 440px);
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+    border: 1px solid var(--line);
+    border-radius: 2rem;
+    background: linear-gradient(145deg, #2b231eea, #171310f2);
+    box-shadow: 0 24px 80px #0e09087a;
 }
 
-/* ========================================
-   ACCESIBILIDAD: MENOS MOVIMIENTO
-   ======================================== */
+.foto-principal img {
+    display: block;
+    width: 76px;
+    height: 76px;
+    object-fit: contain;
+}
+
+.informacion h1 {
+    margin: .95rem 0 .35rem;
+    font: 400 clamp(3.2rem, 7vw, 5.3rem)/.94 Georgia, serif;
+    letter-spacing: -.065em;
+}
+
+.informacion em { color: var(--accent); font-weight: 400; }
+.informacion p { margin: .85rem 0 0; color: var(--muted); line-height: 1.5; }
+.informacion p span { color: var(--accent); }
+
+.redes {
+    display: grid;
+    gap: .6rem;
+    margin-top: 1.55rem;
+}
+
+.redes a, #boton-donaciones {
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+    min-height: 52px;
+    width: 100%;
+    padding: .65rem .85rem;
+    border: 1px solid var(--line);
+    border-radius: .85rem;
+    background: #fff4e60b;
+    color: var(--ink);
+    text-align: left;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .2s, border-color .2s;
+}
+
+.redes a:first-child { background: var(--accent); color: #271910; border-color: transparent; }
+.redes a:first-child:hover { background: #ffe2be; }
+.redes a:not(:first-child):hover, #boton-donaciones:hover { background: #fff4e620; border-color: #fff1df65; }
+
+.icono, .icono-copiar {
+    width: 22px;
+    height: 22px;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.corazon { width: 22px; font-size: 1.5rem; line-height: 1; text-align: center; }
+#flecha-donaciones { margin-left: auto; color: var(--accent); }
+
+#contenido-donaciones {
+    margin-top: .6rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: .85rem;
+    background: #15110e;
+}
+
+#contenido-donaciones h2 { margin: 0; font: 400 1.65rem Georgia, serif; color: var(--accent); }
+#contenido-donaciones h3 { margin: 0; font-size: 1rem; }
+#contenido-donaciones p { margin: .5rem 0 0; color: var(--muted); line-height: 1.55; }
+.objetivo-donacion, .datos-donacion { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.contenedor-alias { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; justify-content: space-between; margin-top: .9rem; }
+#alias-donacion { color: var(--accent); overflow-wrap: anywhere; }
+#boton-copiar-alias { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: .45rem .65rem; border: 1px solid var(--line); border-radius: .55rem; background: #36291f; color: var(--ink); cursor: pointer; }
+#boton-copiar-alias:hover { background: #493729; }
+.icono-copiar { width: 16px; height: 16px; }
+.mensaje-copia:empty { margin: 0 !important; }
+
+@media (max-width: 700px) {
+    .tarjeta { align-items: start; justify-items: center; padding: clamp(8rem, 27svh, 16rem) 1rem 1.25rem; }
+    .foto-fondo { right: 0; background-position: center 24%; }
+    .capa-oscura { background: linear-gradient(180deg, #17110b10 16%, #17110b68 54%, #17110bdd); }
+    .panel { border-radius: 1.55rem; }
+}
 
 @media (prefers-reduced-motion: reduce) {
-    .redes > a,
-    #boton-donaciones,
-    .foto-fondo,
-    .foto-difuminada {
-        transition: none;
-    }
-
-    #contenido-donaciones.donaciones-abriendo,
-    #contenido-donaciones.donaciones-cerrando {
-        animation: none;
-    }
+    *, *::before, *::after { transition: none !important; }
 }
-
