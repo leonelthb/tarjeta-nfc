@@ -257,3 +257,7 @@ button { font: inherit; }
 }
 
 .vista-ir:hover { background: #ded3ff; }
+
+.vista-perfil-red { overflow-x: auto; }
+.vista-perfil-red blockquote { margin: 0; }
+.vista-perfil-red iframe { display: block; border: 0; }
