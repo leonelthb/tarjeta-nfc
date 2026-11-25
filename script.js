@@ -1,70 +1,15 @@
-
-// ============================================
-// ELEMENTOS DEL DESPLEGABLE DE DONACIONES
-// ============================================
-
-// Buscamos los elementos en el HTML.
 const botonDonaciones = document.getElementById("boton-donaciones");
 const contenidoDonaciones = document.getElementById("contenido-donaciones");
 const flechaDonaciones = document.getElementById("flecha-donaciones");
 
-
-// ============================================
-// ABRIR Y CERRAR DONACIONES CON ANIMACIÓN
-// ============================================
-
 if (botonDonaciones && contenidoDonaciones && flechaDonaciones) {
-
     botonDonaciones.addEventListener("click", function () {
-
-        // Comprobamos si el contenido está oculto.
-        const estaOculto = contenidoDonaciones.hidden;
-
-        if (estaOculto) {
-
-            // Mostramos el contenido.
-            contenidoDonaciones.hidden = false;
-
-            // Reiniciamos las clases de animación.
-            contenidoDonaciones.classList.remove("donaciones-cerrando");
-            contenidoDonaciones.classList.remove("donaciones-abriendo");
-
-            // Activamos la animación de apertura.
-            contenidoDonaciones.classList.add("donaciones-abriendo");
-
-            // Actualizamos el estado del botón.
-            botonDonaciones.setAttribute("aria-expanded", "true");
-
-            // Cambiamos la flecha hacia arriba.
-            flechaDonaciones.textContent = "⌃";
-
-        } else {
-
-            // Activamos la animación de cierre.
-            contenidoDonaciones.classList.remove("donaciones-abriendo");
-            contenidoDonaciones.classList.add("donaciones-cerrando");
-
-            // Actualizamos el estado del botón.
-            botonDonaciones.setAttribute("aria-expanded", "false");
-
-            // Cambiamos la flecha hacia abajo.
-            flechaDonaciones.textContent = "⌄";
-
-            // Esperamos a que termine la animación para ocultarlo.
-            contenidoDonaciones.addEventListener("animationend", function cerrar() {
-
-                contenidoDonaciones.hidden = true;
-
-                contenidoDonaciones.classList.remove("donaciones-cerrando");
-
-            }, { once: true });
-
-        }
-
+        const expandido = contenidoDonaciones.hidden;
+        contenidoDonaciones.hidden = !expandido;
+        botonDonaciones.setAttribute("aria-expanded", String(expandido));
+        flechaDonaciones.textContent = expandido ? "⌃" : "⌄";
     });
-
 }
-
 
 // ============================================
 // ELEMENTOS PARA COPIAR EL ALIAS
@@ -246,3 +191,4 @@ if (fotosFondo.length >= 2 && fotosDifuminadas.length >= 2) {
     }, 5000);
 
 }
+
