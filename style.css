@@ -145,10 +145,59 @@ button { font: inherit; }
 .mensaje-copia:empty { margin: 0 !important; }
 
 @media (max-width: 700px) {
-    .tarjeta { align-items: start; justify-items: center; padding: calc(var(--alto-foto-movil) + 1rem) 1rem 1.25rem; }
-    .foto-fondo { inset: 0 0 auto; height: var(--alto-foto-movil); }
-    .capa-oscura { background: linear-gradient(180deg, #10121b24, #10121baa 46%, #10121be8); }
-    .panel { width: min(100%, 440px); border-radius: 1.55rem; }
+    .tarjeta {
+        --alto-foto-movil: clamp(11rem, 34svh, 18rem);
+        --ancho-movil: min(calc(100% - 1.5rem), 440px);
+        align-items: start;
+        justify-items: center;
+        padding: calc(var(--alto-foto-movil) + 1.5rem) 0 max(1rem, env(safe-area-inset-bottom));
+    }
+
+    .foto-fondo {
+        inset: .75rem auto auto 50%;
+        width: var(--ancho-movil);
+        height: var(--alto-foto-movil);
+        transform: translateX(-50%);
+        border-radius: 1.25rem;
+        background-color: #10121b42;
+    }
+
+    .capa-oscura {
+        background: linear-gradient(180deg, #10121b65, #10121bde 62%, #10121bf7);
+    }
+
+    .panel {
+        width: var(--ancho-movil);
+        display: grid;
+        grid-template-columns: 3rem minmax(0, 1fr);
+        align-items: center;
+        column-gap: .75rem;
+        padding: .9rem;
+        border-radius: 1.25rem;
+    }
+
+    .foto-principal img { width: 3rem; height: 3rem; }
+    .informacion h1 { margin: 0; font-size: clamp(1.65rem, 7.5vw, 2.35rem); }
+    .informacion p { margin: .3rem 0 0; font-size: .875rem; line-height: 1.35; }
+
+    .redes {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .45rem;
+        margin-top: .9rem;
+    }
+
+    .redes a, #boton-donaciones {
+        min-height: 46px;
+        padding: .5rem;
+        gap: .4rem;
+        font-size: .875rem;
+    }
+
+    .redes .icono, .corazon { width: 18px; }
+    .redes .icono { height: 18px; }
+    .seccion-donaciones { display: contents; }
+    #contenido-donaciones { grid-column: 1 / -1; margin-top: .15rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
